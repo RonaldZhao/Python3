@@ -1,0 +1,13 @@
+							   PyPy 和 CPython的不同
+   这篇文章是写的是PyPy Python解释器和CPython之间的一些不同和不兼容性。这些不同之中有一些是“被设计的”，因为我们认为CPython在一些情况下的表现是充满bug的，而我们不想复制bug。
+   那些在这篇文章中罗列出来的不同应该被认为是PyPy的bug。
+扩展模块
+   我们支持的扩展模块列表：
+   ·作为内置模块来支持(在pypy/module/目录下)：
+	__builtin__ __pypy__ _ast _codecs _collections _continuation _ffi _hashlib _io _locale _lsprof _md5 _minimal_curses _multiprocessing _random _rawffi _sha _socket _sre _ssl _warnings _weakref _winreg array binascii bz2 cStringIO cmath cpyext crypt errno exceptions fcntl gc imp itertools marshal math mmap operator parser posix pyexpat select signal struct symbol sys termios thread time token unicodedata zipimport zlib
+    当一些仅在Unix下支持的模块在Windows上解释的时候将被忽略，而用以下模块编译替代。
+	_winreg
+   ·通过用纯粹的Python重写来支持(可能使用了cffi)：见lib_pypy/目录
+    我们支持这样的模块样例:ctypes,cPickle,cmath,dbm,datetime...注意，一些模块都在这里或者上文所列;内置模块将被默认使用(但是可能在解释期间被禁用).
+   那些既未在上文提到也不在lib_pypy/目录下的扩展模快(例如,用C语言写的模块,CPython中的模块)在PyPy中是不可用的.(通过cpyext你可能有机会以任何方式使用它们).
+		————翻译自http://pypy.readthedocs.io/en/latest/cpython_differences.html
