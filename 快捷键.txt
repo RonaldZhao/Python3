@@ -1,0 +1,4 @@
+IDLE中：
+    windows下：
+        Alt+n：上一条语句
+        Alt+P：下一条语句
